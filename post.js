@@ -39,14 +39,19 @@ const renderPost = async () => {
   const post_id = url.split("=")[1];
 
   const post = await getPost(post_id);
+  elLoading.classList.add("d-none");
+
+  if (!post) {
+    elNotFound.classList.remove("d-none");
+    return;
+  }
+
   const thumbnail = await getRandomPic();
   const user_id = post.userId;
   const author = await getAuthor(user_id);
   const profilePicture = await getRandomProfile();
+  const comments = await getPostComments(post_id);
 
-  //logic error
-
-  elLoading.classList.add("d-none");
   elDetailBerita.classList.remove("d-none");
 
   elPageTitle.innerHTML = post.title;
@@ -54,6 +59,13 @@ const renderPost = async () => {
   elCardText.innerHTML = post.body;
   elCardAuthorImg.setAttribute("src", profilePicture);
   elCardAuthorName.innerHTML = author.name;
+  elCardAuthorName.setAttribute("href", `/author.html?author_id=${author.id}`);
+  elCardAuthorEmail.innerHTML = author.email;
+
+  for (let comment of comments) {
+    const list = createListElement(comment);
+    elListGroup.appendChild(list);
+  }
 };
 
 renderPost();
