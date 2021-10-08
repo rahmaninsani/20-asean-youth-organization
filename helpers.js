@@ -15,15 +15,12 @@ export const getPosts = async () => {
 export const getPost = async (post_id) => {
   // EDIT HERE
   try {
-  const url = await fetch("https://jsonplaceholder.typicode.com/posts") + post_id;
-  const response = await url.json();
-  const filteredResponse = response.filter(item) => item.id < 17);
-  
-  
-  return filteredResponse;
+    const url = await fetch(`https://jsonplaceholder.typicode.com/posts/${post_id}`);
+    const response = await url.json();
+    return response;
   } catch (error) {
-	  console.log("getPost", error);
-	  throw error;
+    console.log("getPost", error);
+    throw error;
   }
 };
 
@@ -33,6 +30,14 @@ export const getPostComments = async (post_id) => {
 
 export const getAuthor = async (user_id) => {
   // EDIT HERE
+  try {
+    const url = await fetch(`https://jsonplaceholder.typicode.com/users/${user_id}`);
+    const response = await url.json();
+    return response;
+  } catch (error) {
+    console.log("getPost", error);
+    throw error;
+  }
 };
 
 export const getPostsByAuthor = async (author_id) => {
