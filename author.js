@@ -1,15 +1,17 @@
-const params;
+// const params;
 
-const elPageTitle = document.querySelector('#page-title');
-const elPostList = document.querySelector('#post-list');
-const elLoading = document.querySelector('#loading');
-const elEmptyPost = document.querySelector('#empty-post');
+import { getAuthor, getPostsByAuthor, getRandomPic } from "./helpers.js";
+
+const elPageTitle = document.querySelector("#page-title");
+const elPostList = document.querySelector("#post-list");
+const elLoading = document.querySelector("#loading");
+const elEmptyPost = document.querySelector("#empty-post");
 
 const createPostElement = (thumbnail, post) => {
-  const elCol = document.createElement('div');
-  elCol.classList.add('col-12');
+  const elCol = document.createElement("div");
+  elCol.classList.add("col-12");
   elCol.insertAdjacentHTML(
-    'beforeend',
+    "beforeend",
     `<div class="card mb-3 w-100">
       <div class="row g-0">
         <div class="col-md-4">
@@ -25,11 +27,32 @@ const createPostElement = (thumbnail, post) => {
       </div>
     </div>`
   );
+  // Tambahan
+  elPostList.appendChild(elCol);
 };
 
 const renderPosts = async () => {
   // EDIT HERE
-  const author_id = post.userId;
+  const url = window.location.toString();
+  const user_id = url.split("=")[1];
+
+  const author = await getAuthor(user_id);
+  elLoading.classList.add("d-none");
+
+  if (!author) {
+    elEmptyPost.classList.remove("d-none");
+    return;
+  }
+
+  const posts = await getPostsByAuthor(user_id);
+
+  elPostList.classList.remove("d-none");
+  elPageTitle.innerHTML = author.name;
+
+  for (let post of posts) {
+    const thumbnail = await getRandomPic();
+    createPostElement(thumbnail, post);
+  }
 };
 
 renderPosts();

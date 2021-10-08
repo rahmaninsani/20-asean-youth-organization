@@ -46,20 +46,28 @@ export const getPostComments = async (post_id) => {
 
 export const getAuthor = async (user_id) => {
   // EDIT HERE
-  try {
-    const url = await fetch(`https://jsonplaceholder.typicode.com/users/${user_id}`);
-    const response = await url.json();
-    return response;
-  } catch (error) {
-    console.log("getPost", error);
-    throw error;
+  // try {
+  //   const url = await fetch(`https://jsonplaceholder.typicode.com/users/${user_id}`);
+  //   const response = await url.json();
+  //   return response;
+  // } catch (error) {
+  //   console.log("getPost", error);
+  //   throw error;
+  // }
+
+  const url = await fetch(`https://jsonplaceholder.typicode.com/users/${user_id}`);
+  if (!url.ok) {
+    return false;
   }
+
+  const response = await url.json();
+  return response;
 };
 
 export const getPostsByAuthor = async (author_id) => {
   // EDIT HERE
-   try {
-    const url = await fetch(`https://jsonplaceholder.typicode.com/posts/${author_id}`);
+  try {
+    const url = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${author_id}`);
     const response = await url.json();
     return response;
   } catch (error) {
@@ -67,7 +75,6 @@ export const getPostsByAuthor = async (author_id) => {
     throw error;
   }
 };
-
 
 export const getRandomPic = async () => {
   try {
