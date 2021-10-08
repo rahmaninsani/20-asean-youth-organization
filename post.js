@@ -59,7 +59,7 @@ const renderPost = async () => {
   elCardText.innerHTML = post.body;
   elCardAuthorImg.setAttribute("src", profilePicture);
   elCardAuthorName.innerHTML = author.name;
-  elCardAuthorName.setAttribute("href", `/author.html?author_id=${author.id}`);
+  elCardAuthorName.setAttribute("href", `/author.html?user_id=${author.id}`);
   elCardAuthorEmail.innerHTML = author.email;
 
   for (let comment of comments) {
