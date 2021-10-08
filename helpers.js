@@ -1,5 +1,15 @@
 export const getPosts = async () => {
   // EDIT HERE
+  try {
+    const url = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const response = await url.json();
+    const filteredResponse = response.filter((item) => item.id < 17);
+
+    return filteredResponse;
+  } catch (error) {
+    console.log("getPosts", error);
+    throw error;
+  }
 };
 
 export const getPost = async (post_id) => {
@@ -20,20 +30,20 @@ export const getPostsByAuthor = async (author_id) => {
 
 export const getRandomPic = async () => {
   try {
-    const image = await fetch('https://source.unsplash.com/random/720x480');
+    const image = await fetch("https://source.unsplash.com/random/720x480");
     return image.url;
   } catch (error) {
-    console.log('getRandomPic', error);
+    console.log("getRandomPic", error);
     throw error;
   }
 };
 
 export const getRandomProfile = async () => {
   try {
-    const image = await fetch('https://source.unsplash.com/480x480/?profile');
+    const image = await fetch("https://source.unsplash.com/480x480/?profile");
     return image.url;
   } catch (error) {
-    console.log('getRandomProfile', error);
+    console.log("getRandomProfile", error);
     throw error;
   }
 };
