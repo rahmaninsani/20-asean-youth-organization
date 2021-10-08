@@ -39,6 +39,11 @@ const createPostElement = (thumbnail, post) => {
 
 const renderPosts = async () => {
   // EDIT HERE
+  // ${post.title};
+  // elCard.innerHTML = post.title;
+
+  // .then(response => response.json())
+  // .then(json => console.log(json))
 };
 
 renderPosts();
