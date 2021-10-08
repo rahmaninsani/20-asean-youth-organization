@@ -29,6 +29,7 @@ const createPostElement = (thumbnail, post) => {
 
 const renderPosts = async () => {
   // EDIT HERE
+  const author_id = post.userId;
 };
 
 renderPosts();

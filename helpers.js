@@ -58,7 +58,16 @@ export const getAuthor = async (user_id) => {
 
 export const getPostsByAuthor = async (author_id) => {
   // EDIT HERE
+   try {
+    const url = await fetch(`https://jsonplaceholder.typicode.com/posts/${author_id}`);
+    const response = await url.json();
+    return response;
+  } catch (error) {
+    console.log("getPostsByAuthor", error);
+    throw error;
+  }
 };
+
 
 export const getRandomPic = async () => {
   try {
