@@ -37,7 +37,6 @@ const createPostElement = (thumbnail, post) => {
   elCardImg.setAttribute("src", thumbnail);
   elCardTitle.innerHTML = post.title;
   elCardBtn.setAttribute("href", `/post.html?post_id=${post.id}`);
-  elDaftarBerita.appendChild(elCol);
 
   return elCol;
 };
@@ -48,7 +47,8 @@ const renderPosts = async () => {
 
   for (let post of posts) {
     const thumbnail = await getRandomPic();
-    createPostElement(thumbnail, post);
+    const postEl = createPostElement(thumbnail, post);
+    elDaftarBerita.appendChild(postEl);
   }
 };
 

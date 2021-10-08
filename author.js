@@ -27,8 +27,7 @@ const createPostElement = (thumbnail, post) => {
       </div>
     </div>`
   );
-  // Tambahan
-  elPostList.appendChild(elCol);
+  return elCol;
 };
 
 const renderPosts = async () => {
@@ -51,7 +50,8 @@ const renderPosts = async () => {
 
   for (let post of posts) {
     const thumbnail = await getRandomPic();
-    createPostElement(thumbnail, post);
+    const postEl = createPostElement(thumbnail, post);
+    elPostList.appendChild(postEl);
   }
 };
 
