@@ -1,3 +1,5 @@
+import { getPost, getPostComments, getAuthor } from './helpers.js';
+
 const params; // tempat menampung parameter yang ada
 
 const elPageTitle = document.querySelector('#page-title');
@@ -33,6 +35,10 @@ const createListElement = (comment) => {
 
 const renderPost = async () => {
   // EDIT HERE
+const post = await getPost();
+
 };
+
+renderPost()
 
 renderPost();
