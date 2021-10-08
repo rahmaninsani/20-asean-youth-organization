@@ -1,4 +1,6 @@
-const params;
+import { getPostsByAuthor, getRandomPic, getAuthor } from "./helpers.js";
+
+// const params;
 
 const elPageTitle = document.querySelector('#page-title');
 const elPostList = document.querySelector('#post-list');
@@ -29,6 +31,20 @@ const createPostElement = (thumbnail, post) => {
 
 const renderPosts = async () => {
   // EDIT HERE
+  const url = window.location.toString();
+  const author_id = url.split("=")[1];
+  const posts = await getPostsByAuthor(author_id);
+  const author = await getAuthor(author_id);
+
+  elLoading.classList.add("d-none");
+  elEmptyPost.classList.add("d-none");
+  elPostList.classList.remove("d-none");
+
+  elPageTitle.innerHTML = `${author.name} Posts`;
+  for (let post of posts) {
+    const thumbnail = await getRandomPic();
+    createPostElement(thumbnail, post);
+  }
 };
 
 renderPosts();

@@ -1,16 +1,27 @@
 export const getPosts = async () => {
   // EDIT HERE
   try {
-    const text = await fetch('https://jsonplaceholder.typicode.com/todos/1')
-    return text;
+    const url = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const response = await url.json();
+    const filteredResponse = response.filter((item) => item.id < 17);
+
+    return filteredResponse;
   } catch (error) {
-    console.log('getPosts', error);
+    console.log("getPosts", error);
     throw error;
   }
 };
 
 export const getPost = async (post_id) => {
   // EDIT HERE
+  try {
+    const url = await fetch(`https://jsonplaceholder.typicode.com/posts/${post_id}`);
+    const response = await url.json();
+    return response;
+  } catch (error) {
+    console.log("getPost", error);
+    throw error;
+  }
 };
 
 export const getPostComments = async (post_id) => {
@@ -19,28 +30,46 @@ export const getPostComments = async (post_id) => {
 
 export const getAuthor = async (user_id) => {
   // EDIT HERE
+  try {
+    const url = await fetch(`https://jsonplaceholder.typicode.com/users/${user_id}`);
+    const response = await url.json();
+    return response;
+  } catch (error) {
+    console.log("getPost", error);
+    throw error;
+  }
 };
 
 export const getPostsByAuthor = async (author_id) => {
   // EDIT HERE
+  try {
+    const url = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const response = await url.json();
+    const filteredResponse = response.filter((item) => item.userId == author_id);
+
+    return filteredResponse;
+  } catch (error) {
+    console.log("getPostsByAuthor", error);
+    throw error;
+  }
 };
 
 export const getRandomPic = async () => {
   try {
-    const image = await fetch('https://source.unsplash.com/random/720x480');
+    const image = await fetch("https://source.unsplash.com/random/720x480");
     return image.url;
   } catch (error) {
-    console.log('getRandomPic', error);
+    console.log("getRandomPic", error);
     throw error;
   }
 };
 
 export const getRandomProfile = async () => {
   try {
-    const image = await fetch('https://source.unsplash.com/480x480/?profile');
+    const image = await fetch("https://source.unsplash.com/480x480/?profile");
     return image.url;
   } catch (error) {
-    console.log('getRandomProfile', error);
+    console.log("getRandomProfile", error);
     throw error;
   }
 };
