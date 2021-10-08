@@ -27,6 +27,7 @@ const createPostElement = (thumbnail, post) => {
       </div>
     </div>`
   );
+  return elCol;
 };
 
 const renderPosts = async () => {
@@ -37,13 +38,14 @@ const renderPosts = async () => {
   const author = await getAuthor(author_id);
 
   elLoading.classList.add("d-none");
-  elEmptyPost.classList.add("d-none");
   elPostList.classList.remove("d-none");
 
   elPageTitle.innerHTML = `${author.name} Posts`;
+
   for (let post of posts) {
     const thumbnail = await getRandomPic();
-    createPostElement(thumbnail, post);
+    const postAuthor = createPostElement(thumbnail, post);
+    elPostList.appendChild(postAuthor);
   }
 };
 
